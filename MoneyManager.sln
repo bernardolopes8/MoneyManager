@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAbstractionLayerPCL", "DataAbstractionLayerPCL\DataAbstractionLayerPCL.csproj", "{4E827BE4-D724-4FC9-B82F-169C940136D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager-BL-DAL", "MoneyManager-BL-DAL\MoneyManager-BL-DAL.csproj", "{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagerConsoleTest", "MoneyManagerConsoleTest\MoneyManagerConsoleTest.csproj", "{81235324-7BBA-4661-9EFB-447DF63483A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordHash", "PasswordHash\PasswordHash.csproj", "{637C9340-EB32-4ACD-8AF0-1D3C675397F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E827BE4-D724-4FC9-B82F-169C940136D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E827BE4-D724-4FC9-B82F-169C940136D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E827BE4-D724-4FC9-B82F-169C940136D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E827BE4-D724-4FC9-B82F-169C940136D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81235324-7BBA-4661-9EFB-447DF63483A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81235324-7BBA-4661-9EFB-447DF63483A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81235324-7BBA-4661-9EFB-447DF63483A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81235324-7BBA-4661-9EFB-447DF63483A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637C9340-EB32-4ACD-8AF0-1D3C675397F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637C9340-EB32-4ACD-8AF0-1D3C675397F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637C9340-EB32-4ACD-8AF0-1D3C675397F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637C9340-EB32-4ACD-8AF0-1D3C675397F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

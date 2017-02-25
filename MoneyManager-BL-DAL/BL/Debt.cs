@@ -9,7 +9,6 @@ namespace MoneyManager_BL_DAL
         public double amount { get; set; }
         public DateTime deadline { get; set; }
         public string description { get; set; }
-        public long user_id { get; set; }
         public long category_id { get; set; }
         public long type_id { get; set; }    
 
@@ -41,11 +40,6 @@ namespace MoneyManager_BL_DAL
         public static ObservableCollection<Debt> RetrieveById(long id)
         {
             return (DebtDAL.RetrieveById(id));
-        }
-
-        public static ObservableCollection<Debt> RetrieveByUser(long user_id)
-        {
-            return (DebtDAL.RetrieveByUser(user_id));
         }
 
         public static ObservableCollection<Debt> RetrieveByCategory(long category_id)

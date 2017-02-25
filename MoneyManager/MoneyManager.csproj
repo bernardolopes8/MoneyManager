@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{8441d18f-76c1-42b3-85c9-5b614ad30499}</ProjectGuid>
+    <ProjectGuid>{8441D18F-76C1-42B3-85C9-5B614AD30499}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoneyManager</RootNamespace>
@@ -16,9 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
     <PackageCertificateKeyFile>MoneyManager_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Users\Asus\Desktop\AppPackages\</AppxPackageDir>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -94,29 +97,90 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountParameters.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Converters\AccountConverter.cs" />
+    <Compile Include="Converters\AmountFormatter.cs" />
+    <Compile Include="Converters\CategoryConverter.cs" />
+    <Compile Include="Converters\TypeConverter.cs" />
+    <Compile Include="LoadData.cs" />
+    <Compile Include="SettingsHandler.cs" />
+    <Compile Include="Views\Dialogs\Add\AddAccountDialog.xaml.cs">
+      <DependentUpon>AddAccountDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Add\AddCategoryDialog.xaml.cs">
+      <DependentUpon>AddCategoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Add\AddTransactionDialog.xaml.cs">
+      <DependentUpon>AddTransactionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Update\UpdateAccountDialog.xaml.cs">
+      <DependentUpon>UpdateAccountDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Update\UpdateCategoryDialog.xaml.cs">
+      <DependentUpon>UpdateCategoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Update\UpdateDebtDialog.xaml.cs">
+      <DependentUpon>UpdateDebtDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Update\UpdateTransactionDialog.xaml.cs">
+      <DependentUpon>UpdateTransactionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AccountDetailsPage.xaml.cs">
+      <DependentUpon>AccountDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AccountsPage.xaml.cs">
+      <DependentUpon>AccountsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CategoriesPage.xaml.cs">
+      <DependentUpon>CategoriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DebtsPage.xaml.cs">
+      <DependentUpon>DebtsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\TransactionsPage.xaml.cs">
+      <DependentUpon>TransactionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Add\AddDebtDialog.xaml.cs">
+      <DependentUpon>AddDebtDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\DebtViewModel.cs" />
+    <Compile Include="ViewModel\TransactionViewModel.cs" />
+    <Compile Include="ViewModel\TypeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="MoneyManager_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\categories.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Assets\Piggy.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\tutorial.mp4" />
+    <Content Include="Assets\types.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
@@ -125,16 +189,82 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\Dialogs\Add\AddAccountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Add\AddCategoryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Add\AddTransactionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Update\UpdateAccountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Update\UpdateCategoryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Update\UpdateDebtDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Update\UpdateTransactionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AccountDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AccountsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CategoriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DebtsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\TransactionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Add\AddDebtDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyManager-BL-DAL\MoneyManager-BL-DAL.csproj">
+      <Project>{E4CF85E5-86D6-4719-9BF6-EFAC01AD5CB9}</Project>
+      <Name>MoneyManager-BL-DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="SQLite.UWP.2015, Version=3.16.2">
+      <Name>SQLite for Universal Windows Platform %28SQLite.UWP.2015, Version=3.16.2%29</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

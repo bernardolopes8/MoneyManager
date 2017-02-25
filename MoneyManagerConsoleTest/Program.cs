@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace MoneyManagerConsoleTest
+namespace MoneyManagerConsoleTestA
 {
     class Program
     {

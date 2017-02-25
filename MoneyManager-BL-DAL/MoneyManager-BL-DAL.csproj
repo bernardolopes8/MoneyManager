@@ -41,29 +41,27 @@
   <ItemGroup>
     <Compile Include="BL\Account.cs" />
     <Compile Include="BL\Category.cs" />
-    <Compile Include="BL\Currency.cs" />
+    <Compile Include="BL\Database.cs" />
     <Compile Include="BL\Debt.cs" />
     <Compile Include="BL\Transaction.cs" />
     <Compile Include="BL\MType.cs" />
-    <Compile Include="BL\User.cs" />
     <Compile Include="DAL\AccountDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
-    <Compile Include="DAL\CurrencyDAL.cs" />
     <Compile Include="DAL\DebtDAL.cs" />
     <Compile Include="DAL\TransactionDAL.cs" />
     <Compile Include="DAL\MTypeDAL.cs" />
-    <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MoneyManager\PasswordHash\PasswordHash.csproj">
-      <Project>{637C9340-EB32-4ACD-8AF0-1D3C675397F7}</Project>
-      <Name>PasswordHash</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataAbstractionLayerPCL\DataAbstractionLayerPCL.csproj">
       <Project>{4e827be4-d724-4fc9-b82f-169c940136d2}</Project>
       <Name>DataAbstractionLayerPCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\References\Windows.Foundation.UniversalApiContract\3.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

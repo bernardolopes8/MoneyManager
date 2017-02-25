@@ -1,0 +1,18 @@
+﻿<ContentDialog
+    x:Class="MoneyManager.Views.Dialogs.Update.UpdateCategoryDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManager.Views.Dialogs.Update"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Update Category"
+    PrimaryButtonText="Update"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <TextBox Text="{x:Bind CategoryViewModel.category.name , Mode=TwoWay}" Header="Name"/>
+    </Grid>
+</ContentDialog>

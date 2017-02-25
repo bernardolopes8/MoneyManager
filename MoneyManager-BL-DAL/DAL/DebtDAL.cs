@@ -16,7 +16,6 @@ namespace MoneyManager_BL_DAL
             e.amount = (double)statement["amount"];
             e.deadline = DateTime.Parse((string)statement["deadline"]);
             e.description = (string)statement["description"];
-            e.user_id = (long)statement["user_id"];
             e.category_id = (long)statement["category_id"];
             e.type_id = (long)statement["type_id"];
         }
@@ -28,15 +27,12 @@ namespace MoneyManager_BL_DAL
                             ""amount"" FLOAT NOT NULL,
                             ""deadline"" DATETIME,
                             ""description"" VARCHAR(45),
-                            ""user_id"" INTEGER NOT NULL,
                             ""category_id"" INTEGER,
                             ""type_id"" INTEGER,
-                            CONSTRAINT ""fk_debt_user1"" FOREIGN KEY(""user_id"") REFERENCES ""user""(""id"")
-                            ON UPDATE CASCADE ON DELETE CASCADE,
                             CONSTRAINT ""fk_debt_category1"" FOREIGN KEY(""category_id"") REFERENCES ""category""(""id"")
                             ON UPDATE CASCADE ON DELETE SET NULL,
                             CONSTRAINT ""fk_debtn_type1"" FOREIGN KEY(""type_id"") REFERENCES ""type""(""id"")
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE
                          ); ";
 
             DB db = DB.getDB(databaseFile);
@@ -45,8 +41,8 @@ namespace MoneyManager_BL_DAL
 
         public static void Create(Debt debt)
         {
-            string sql = @"INSERT INTO debt (amount, deadline, description, user_id, category_id, type_id) 
-                            VALUES (@amount, @deadline, @description, @user_id, @category_id, @type_id)";
+            string sql = @"INSERT INTO debt (amount, deadline, description, category_id, type_id) 
+                            VALUES (@amount, @deadline, @description, @category_id, @type_id)";
 
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
@@ -54,7 +50,6 @@ namespace MoneyManager_BL_DAL
             parms.Add("@amount", debt.amount);
             parms.Add("@deadline", debt.deadline.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             parms.Add("@description", debt.description);
-            parms.Add("@user_id", debt.user_id);
             parms.Add("@category_id", debt.category_id);
             parms.Add("@type_id", debt.type_id);
             db.NonQuery(sql, parms);
@@ -63,7 +58,7 @@ namespace MoneyManager_BL_DAL
         public static void Update(Debt debt)
         {
             string sql = @"UPDATE debt
-                            SET amount=@amount, deadline=@deadline, description=@description, user_id=@user_id, 
+                            SET amount=@amount, deadline=@deadline, description=@description,  
                             category_id=@category_id, type_id=@type_id
                             WHERE id=@id";
 
@@ -73,7 +68,6 @@ namespace MoneyManager_BL_DAL
             parms.Add("@amount", debt.amount);
             parms.Add("@deadline", debt.deadline.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             parms.Add("@description", debt.description);
-            parms.Add("@user_id", debt.user_id);
             parms.Add("@category_id", debt.category_id);
             parms.Add("@type_id", debt.type_id);
             parms.Add("@id", debt.id);
@@ -132,28 +126,6 @@ namespace MoneyManager_BL_DAL
             return (res);
         }
 
-        public static ObservableCollection<Debt> RetrieveByUser(long user_id)
-        {
-            ObservableCollection<Debt> res = new ObservableCollection<Debt>();
-
-            string sql = "SELECT * FROM debt WHERE user_id=@user_id";
-            DB db = DB.getDB(databaseFile);
-            Dictionary<string, object> parms = new Dictionary<string, object>();
-
-            parms.Add("@user_id", user_id);
-            ISQLiteStatement statement = db.Query(sql, parms);
-
-            while (statement.Step() == SQLiteResult.ROW)
-            {
-                Debt e = new Debt();
-
-                Mapping(statement, e);
-                res.Add(e);
-            }
-
-            return (res);
-        }
-
         public static ObservableCollection<Debt> RetrieveByCategory(long category_id)
         {
             ObservableCollection<Debt> res = new ObservableCollection<Debt>();
@@ -180,7 +152,7 @@ namespace MoneyManager_BL_DAL
         {
             ObservableCollection<Debt> res = new ObservableCollection<Debt>();
 
-            string sql = "SELECT * FROM debt WHERE type_id=@type_id";
+            string sql = "SELECT * FROM debt WHERE type_id=@type_id ORDER BY deadline";
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
 

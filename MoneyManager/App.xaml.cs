@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using MoneyManager_BL_DAL.BL;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace MoneyManager
@@ -31,7 +22,7 @@ namespace MoneyManager
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
-
+        
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -63,6 +54,10 @@ namespace MoneyManager
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                // TODO: Check if first run
+                Database.CreateTables();
+                LoadData.LoadInitialData();
             }
 
             if (e.PrelaunchActivated == false)

@@ -7,7 +7,6 @@ namespace MoneyManager_BL_DAL
         public long id { get; set; }
         public string name { get; set; }
         public double balance { get; set; }
-        public long user_id { get; set; }
 
         public static void CreateTable()
         {
@@ -42,11 +41,6 @@ namespace MoneyManager_BL_DAL
         public static ObservableCollection<Account> RetrieveById(long id)
         {
             return (AccountDAL.RetrieveById(id));
-        }
-
-        public static ObservableCollection<Account> RetrieveByUser(long user_id)
-        {
-            return (AccountDAL.RetrieveByUser(user_id));
         }
     }
 }

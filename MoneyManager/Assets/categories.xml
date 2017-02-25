@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<categories>
+  <item>
+    <name>Food</name>
+  </item>
+  <item>
+    <name>Transportation</name>
+  </item>
+  <item>
+    <name>Sports</name>
+  </item>
+  <item>
+    <name>Bills</name>
+  </item>
+  <item>
+    <name>Videogames</name>
+  </item>
+  <item>
+    <name>Hygiene</name>
+  </item>
+</categories>

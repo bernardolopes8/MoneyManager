@@ -16,7 +16,6 @@ namespace MoneyManager_BL_DAL
             e.amount = (double)statement["amount"];
             e.date = DateTime.Parse((string)statement["date"]);
             e.description = (string)statement["description"];
-            e.user_id = (long)statement["user_id"];
             e.category_id = (long)statement["category_id"];
             e.account_id = (long)statement["account_id"];
             e.type_id = (long)statement["type_id"];
@@ -29,18 +28,15 @@ namespace MoneyManager_BL_DAL
                             ""amount"" FLOAT NOT NULL,
                             ""date"" DATETIME NOT NULL,
                             ""description"" VARCHAR(45),
-                            ""user_id"" INTEGER NOT NULL,
                             ""category_id"" INTEGER,
                             ""account_id"" INTEGER,
                             ""type_id"" INTEGER,
-                            CONSTRAINT ""fk_transaction_user1"" FOREIGN KEY(""user_id"") REFERENCES ""user""(""id"")
-                            ON UPDATE CASCADE ON DELETE CASCADE,
                             CONSTRAINT ""fk_transaction_category1"" FOREIGN KEY(""category_id"") REFERENCES ""category""(""id"")
                             ON UPDATE CASCADE ON DELETE SET NULL,
                             CONSTRAINT ""fk_transaction_account1"" FOREIGN KEY(""account_id"") REFERENCES ""account""(""id"")
                             ON UPDATE CASCADE ON DELETE SET NULL,
                             CONSTRAINT ""fk_transaction_type1"" FOREIGN KEY(""type_id"") REFERENCES ""type""(""id"")
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE
                          ); ";
 
             DB db = DB.getDB(databaseFile);
@@ -49,8 +45,8 @@ namespace MoneyManager_BL_DAL
 
         public static void Create(Transaction transaction)
         {
-            string sql = @"INSERT INTO m_transaction (amount, date, description, user_id, category_id, account_id, type_id) 
-                            VALUES (@amount, @date, @description, @user_id, @category_id, @account_id, @type_id)";
+            string sql = @"INSERT INTO m_transaction (amount, date, description, category_id, account_id, type_id) 
+                            VALUES (@amount, @date, @description, @category_id, @account_id, @type_id)";
 
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
@@ -58,7 +54,6 @@ namespace MoneyManager_BL_DAL
             parms.Add("@amount", transaction.amount);
             parms.Add("@date", transaction.date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             parms.Add("@description", transaction.description);
-            parms.Add("@user_id", transaction.user_id);
             parms.Add("@category_id", transaction.category_id);
             parms.Add("@account_id", transaction.account_id);
             parms.Add("@type_id", transaction.type_id);
@@ -68,7 +63,7 @@ namespace MoneyManager_BL_DAL
         public static void Update(Transaction transaction)
         {
             string sql = @"UPDATE m_transaction
-                            SET amount=@amount, date=@date, description=@description, user_id=@user_id, 
+                            SET amount=@amount, date=@date, description=@description, 
                             category_id=@category_id, account_id=@account_id, type_id=@type_id
                             WHERE id=@id";
 
@@ -78,7 +73,6 @@ namespace MoneyManager_BL_DAL
             parms.Add("@amount", transaction.amount);
             parms.Add("@date", transaction.date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             parms.Add("@description", transaction.description);
-            parms.Add("@user_id", transaction.user_id);
             parms.Add("@category_id", transaction.category_id);
             parms.Add("@account_id", transaction.account_id);
             parms.Add("@type_id", transaction.type_id);
@@ -138,28 +132,6 @@ namespace MoneyManager_BL_DAL
             return (res);
         }
 
-        public static ObservableCollection<Transaction> RetrieveByUser(long user_id)
-        {
-            ObservableCollection<Transaction> res = new ObservableCollection<Transaction>();
-
-            string sql = "SELECT * FROM m_transaction WHERE user_id=@user_id";
-            DB db = DB.getDB(databaseFile);
-            Dictionary<string, object> parms = new Dictionary<string, object>();
-
-            parms.Add("@user_id", user_id);
-            ISQLiteStatement statement = db.Query(sql, parms);
-
-            while (statement.Step() == SQLiteResult.ROW)
-            {
-                Transaction e = new Transaction();
-
-                Mapping(statement, e);
-                res.Add(e);
-            }
-
-            return (res);
-        }
-
         public static ObservableCollection<Transaction> RetrieveByCategory(long category_id)
         {
             ObservableCollection<Transaction> res = new ObservableCollection<Transaction>();
@@ -186,7 +158,7 @@ namespace MoneyManager_BL_DAL
         {
             ObservableCollection<Transaction> res = new ObservableCollection<Transaction>();
 
-            string sql = "SELECT * FROM m_transaction WHERE type_id=@type_id";
+            string sql = "SELECT * FROM m_transaction WHERE type_id=@type_id ORDER BY date DESC";
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
 
@@ -208,7 +180,7 @@ namespace MoneyManager_BL_DAL
         {
             ObservableCollection<Transaction> res = new ObservableCollection<Transaction>();
 
-            string sql = "SELECT * FROM m_transaction WHERE account_id=@account_id";
+            string sql = "SELECT * FROM m_transaction WHERE account_id=@account_id ORDER BY date DESC";
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
 

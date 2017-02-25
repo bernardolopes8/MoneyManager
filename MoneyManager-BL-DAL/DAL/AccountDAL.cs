@@ -14,7 +14,6 @@ namespace MoneyManager_BL_DAL
             e.id = (long)statement["id"];
             e.name = (string)statement["name"];
             e.balance = (double)statement["balance"];
-            e.user_id = (long)statement["user_id"];
         }
 
         public static void CreateTable()
@@ -23,10 +22,7 @@ namespace MoneyManager_BL_DAL
                             ""id"" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                             ""name"" VARCHAR(45) NOT NULL,
                             ""balance"" FLOAT NOT NULL,
-                            ""user_id"" INTEGER NOT NULL,
-                            CONSTRAINT ""name_UNIQUE"" UNIQUE(""name""),
-                            CONSTRAINT ""fk_account_user1"" FOREIGN KEY(""user_id"") REFERENCES ""user""(""id"")
-                            ON UPDATE CASCADE ON DELETE CASCADE
+                            CONSTRAINT ""name_UNIQUE"" UNIQUE(""name"")
                          ); ";
 
             DB db = DB.getDB(databaseFile);
@@ -35,22 +31,21 @@ namespace MoneyManager_BL_DAL
 
         public static void Create(Account account)
         {
-            string sql = @"INSERT INTO account (name, balance, user_id) 
-                            VALUES (@name, @balance, @user_id)";
+            string sql = @"INSERT INTO account (name, balance) 
+                            VALUES (@name, @balance)";
 
             DB db = DB.getDB(databaseFile);
             Dictionary<string, object> parms = new Dictionary<string, object>();
 
             parms.Add("@name", account.name);
             parms.Add("@balance", account.balance);
-            parms.Add("@user_id", account.user_id);
             if (db.NonQuery(sql, parms)) account.id = db.LastId();
         }
 
         public static void Update(Account account)
         {
             string sql = @"UPDATE account
-                            SET name=@name, balance=@balance, user_id=@user_id
+                            SET name=@name, balance=@balance
                             WHERE id=@id";
 
             DB db = DB.getDB(databaseFile);
@@ -58,7 +53,6 @@ namespace MoneyManager_BL_DAL
 
             parms.Add("@name", account.name);
             parms.Add("@balance", account.balance);
-            parms.Add("@user_id", account.user_id);
             parms.Add("@id", account.id);
             db.NonQuery(sql, parms);
         }
@@ -124,28 +118,6 @@ namespace MoneyManager_BL_DAL
             Dictionary<string, object> parms = new Dictionary<string, object>();
 
             parms.Add("@id", id);
-            ISQLiteStatement statement = db.Query(sql, parms);
-
-            while (statement.Step() == SQLiteResult.ROW)
-            {
-                Account e = new Account();
-
-                Mapping(statement, e);
-                res.Add(e);
-            }
-
-            return (res);
-        }
-
-        public static ObservableCollection<Account> RetrieveByUser(long user_id)
-        {
-            ObservableCollection<Account> res = new ObservableCollection<Account>();
-
-            string sql = "SELECT * FROM account WHERE user_id=@user_id";
-            DB db = DB.getDB(databaseFile);
-            Dictionary<string, object> parms = new Dictionary<string, object>();
-
-            parms.Add("@user_id", user_id);
             ISQLiteStatement statement = db.Query(sql, parms);
 
             while (statement.Step() == SQLiteResult.ROW)

@@ -1,0 +1,52 @@
+﻿<ContentDialog
+    x:Class="MoneyManager.Views.Dialogs.Add.AddTransactionDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManager.Views.Dialogs.Add"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Add New Transaction"
+    PrimaryButtonText="Create"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    
+    <Grid>
+        <StackPanel>
+            <ComboBox Width="300"
+                  x:Name="ComboBox3" 
+                  Header="Account" 
+                  ItemsSource="{x:Bind accounts, Mode=OneWay}"  
+                  SelectedValuePath ="id"
+                  DisplayMemberPath="name"
+                  SelectionChanged="ComboBox_SelectionChanged3">
+            </ComboBox>
+
+            <TextBox Text="{x:Bind TransactionViewModel.transaction.amount ,Mode=TwoWay}" Header="Amount"/>
+
+            <DatePicker x:Name="date" Header="Date" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <TimePicker x:Name="time" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Time"/>
+            
+            <ComboBox Width="300"
+                  x:Name="ComboBox" 
+                  Header="Category" 
+                  ItemsSource="{x:Bind categories, Mode=OneWay}"  
+                  SelectedValuePath ="id"
+                  DisplayMemberPath="name"
+                  SelectionChanged="ComboBox_SelectionChanged">
+            </ComboBox>
+            
+            <TextBox Text="{x:Bind TransactionViewModel.transaction.description ,Mode=TwoWay}" Header="Description"/>
+
+            <ComboBox Width="300"
+                  x:Name="ComboBox2" 
+                  Header="Type" 
+                  ItemsSource="{x:Bind type, Mode=OneWay}"  
+                  SelectedValuePath ="id"
+                  DisplayMemberPath="name"
+                  SelectionChanged="ComboBox_SelectionChanged2">
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

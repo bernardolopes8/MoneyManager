@@ -1,0 +1,33 @@
+﻿<ContentDialog
+    x:Class="MoneyManager.Views.Dialogs.Update.UpdateDebt"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MoneyManager.Views.Dialogs.Update"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Update Debt"
+    PrimaryButtonText="Update"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <StackPanel >
+            <TextBox  Text="{x:Bind DebtViewModel.debt.amount ,Mode=TwoWay}" Header="Amount"/>
+            <TextBox Text="{x:Bind DebtViewModel.debt.description ,Mode=TwoWay}" Header="Description"/>
+
+            <DatePicker x:Name="date" Header="Deadline Date" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <TimePicker x:Name="time" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Deadline Time"/>
+
+            <ComboBox Width="300"
+                  x:Name="ComboBox" 
+                  Header="Category" 
+                  ItemsSource="{x:Bind categories, Mode=OneWay}"  
+                  SelectedValuePath ="id"
+                  DisplayMemberPath="name"
+                  SelectionChanged="ComboBox_SelectionChanged">
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</ContentDialog>
